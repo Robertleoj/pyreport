@@ -1,0 +1,5 @@
+node_modules
+.cache
+.meteor
+.vscode
+.run_app
