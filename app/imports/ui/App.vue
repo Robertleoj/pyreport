@@ -1,16 +1,16 @@
 <template>
     <div>
         <h1>PyReport</h1>
-        <reports/>
+        <report-list/>
     </div>
 </template>
 
 <script>
-import Reports from './components/Reports.vue'
+import ReportList from './components/ReportList.vue'
 
 export default {
   components: {
-    Reports,
+    ReportList,
   },
 }
 </script>

@@ -1,3 +1,10 @@
 import { Mongo } from 'meteor/mongo';
+import SimpleSchema from 'simpl-schema';
 
-export default new Mongo.Collection('reports');
+const Reports =  new Mongo.Collection('reports');
+Reports.schema = new SimpleSchema({
+    title: {type: String},
+    description: {type: String}
+})
+
+export default Reports;
