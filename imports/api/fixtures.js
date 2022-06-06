@@ -5,8 +5,8 @@ Meteor.startup(() => {
     if(Reports.find().count() === 0){
         const reportdata = [
             {
-                title: "Diccreport",
-                description: "All about diccs"
+                title: "Vaccine",
+                description: "Test vaccine report"
             }
         ];
         reportdata.forEach(rep => {

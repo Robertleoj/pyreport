@@ -48,8 +48,7 @@ export default {
 
         get_report_html(){
             console.log(this.reportId);
-            Meteor.call('get_report',this.reportId._str , (error, result) => {
-                // console.log(result);
+            Meteor.call('get_report',this.reportId._str, (error, result) => {
                 this.html = result.html;
             });
         },
