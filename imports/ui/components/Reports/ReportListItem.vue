@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Reports from '../../api/collections/Reports';
+import Reports from '../../../api/collections/Reports';
 
 
 export default {
