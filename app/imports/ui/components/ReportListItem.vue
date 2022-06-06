@@ -29,6 +29,7 @@ export default {
     methods: {
         get_report_html(){
             Meteor.call('get_report', this.reportId, (error, result) => {
+                console.log(error);
                 console.log(result);
             });
         }
