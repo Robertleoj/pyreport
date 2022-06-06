@@ -1,6 +1,6 @@
 <template>
     <div class="report-display">
-        <h3> {{rep.title}} </h3>
+        <h3 @click="get_report_html"> {{rep.title}} </h3>
         <h4> {{rep.description}}</h4>
     </div>
 </template>
@@ -22,6 +22,14 @@ export default {
             // return Reports.findById(this.reportId);
             return Reports.findOne({
                 _id: this.reportId
+            });
+        }
+    },
+
+    methods: {
+        get_report_html(){
+            Meteor.call('get_report', this.reportId, (error, result) => {
+                console.log(result);
             });
         }
     }
