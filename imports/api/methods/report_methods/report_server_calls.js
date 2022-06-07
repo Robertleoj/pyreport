@@ -1,5 +1,5 @@
 import urls from './report_server_config';
-import {postData} from '../utils/requests';
+import {postData} from '../../utils/requests';
 
 Meteor.methods({
     'get_report': async function (report_id){

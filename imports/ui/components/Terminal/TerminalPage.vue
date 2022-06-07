@@ -37,10 +37,17 @@ export default {
     methods: {
         send_report_code(){
             console.log(this.content);
-            Meteor.call('send_report', this.content, (error, result) => {
-                console.log("send_report_error:", error)
-                console.log("send_report_result:", result)
-                this.content = DefaultCode;
+            var title = "Bla";
+            var description = "Bla report";
+            Meteor.call(
+                'add_report',
+                this.content, 
+                title,
+                description,
+                (error, result) => {
+                    console.log("send_report_error:", error)
+                    console.log("send_report_result:", result)
+                    this.content = DefaultCode;
             })
         }
     }
