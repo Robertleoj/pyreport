@@ -6,8 +6,6 @@
         <div class="buttonRow">
             <button @click="send_report_code">Submit Code</button>
         </div>
-        <iframe class="report-container" v-if="this.fetchedHtml!==null" :srcdoc="this.html">
-        </iframe>
     </div>
 </template>
 
@@ -25,7 +23,6 @@ const DefaultCode = 'def isEven(num):\n\treturn num % 2 == 0';
 export default {
     data() {
         return {
-            fetchedHtml: null,
             content: DefaultCode,
         };
     },
@@ -44,14 +41,13 @@ export default {
             var description = "Bla report";
             Meteor.call(
                 'add_report',
-                this.content, 
+                this.content,
                 title,
                 description,
                 (error, result) => {
                     console.log("send_report_error:", error)
                     console.log("send_report_result:", result)
                     this.content = DefaultCode;
-                    this.fetchedHtml = result.html;
             })
         }
     }

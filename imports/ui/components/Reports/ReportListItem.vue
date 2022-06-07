@@ -1,7 +1,8 @@
 <template>
     <div class="report-display">
-        <h3 @click="toggle_show_report"> {{rep.title}} </h3>
+        <h3> {{rep.title}} </h3>
         <h4> {{rep.description}}</h4>
+        <button @click="toggle_show_report">Run Report</button>
         <iframe class="report-container" v-if="this.html!==null" :srcdoc="this.html">
         </iframe>
     </div>
@@ -48,7 +49,7 @@ export default {
 
         get_report_html(){
             console.log(this.reportId);
-            Meteor.call('get_report',this.reportId._str, (error, result) => {
+            Meteor.call('run_report', this.rep.report_code, (error, result) => {
                 this.html = result.html;
             });
         },
