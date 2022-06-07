@@ -1,38 +1,48 @@
 <template>
-  <codemirror
-    v-model="code"
-    placeholder="Code goes here..."
-    :style="{ height: '400px' }"
-    :autofocus="true"
-    :indent-with-tab="true"
-    :tabSize="2"
-    :extensions="extensions"
-    @ready="log('ready', $event)"
-    @change="log('change', $event)"
-    @focus="log('focus', $event)"
-    @blur="log('blur', $event)"
-  />
+    <div>
+        <div class="codeEditor">
+            <textarea v-model="content" id="editor"></textarea>
+        </div>
+        <div class="buttonRow">
+            <button @click="send_report_code">Submit Code</button>
+        </div>
+    </div>
 </template>
 
 
 
 <script>
-import {Codemirror} from 'vue-codemirror'
-import {javascript} from '@codemirror/lang-javascript'
-import { oneDark} from '@codemirror/theme-one-dark'
+import * as CodeMirror from 'codemirror';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/darcula.css';
+import 'codemirror/keymap/vim';
+import 'codemirror/mode/python/python';
+
+const DefaultCode = 'def isEven(num):\n\treturn num % 2 == 0';
 
 export default {
-    components: {
-        Codemirror
-    },
-    setup() {
-        const code = ref(`console.log('Hello World!')`)
-        const extensions = [javascript(), oneDark]
+    data() {
         return {
-            code,
-            extensions,
-            log: console.log
-        }
+            content: DefaultCode,
+        };
     },
+    mounted(){
+        CodeMirror.fromTextArea(document.getElementById('editor'), {
+            lineNumbers: true,
+            theme: 'darcula',
+            keyMap: 'vim',
+            mode: 'python',
+        })
+    },
+    methods: {
+        send_report_code(){
+            console.log(this.content);
+            Meteor.call('send_report', this.content, (error, result) => {
+                console.log("send_report_error:", error)
+                console.log("send_report_result:", result)
+                this.content = DefaultCode;
+            })
+        }
+    }
 }
 </script>
