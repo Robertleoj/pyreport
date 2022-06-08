@@ -13,13 +13,20 @@
             <p class="report-description"> {{rep.description}}</p>
         </div>
         <div><b-spinner v-if="this.html===null && this.shown"/></div>
-        <button
+        <b-button
             v-if="this.html===null"
             class="run-report-button"
             @click.prevent="toggle_show_report"
-            :style="{backgroundColor: theme.blue, color: theme.white}">
+        >
             Run Report
-        </button>
+        </b-button>
+        <b-button
+            v-if="this.html===null"
+            class="run-report-button"
+            @click.prevent="$emit('edit-code-click')"
+        >
+            Edit Code
+        </b-button>
         
         <iframe class="report-container" v-if="this.html!==null" :srcdoc="this.html">
         </iframe>
@@ -73,17 +80,15 @@ export default {
         },
 
         get_report_html() {
-            setTimeout(() => {
             console.log(this.reportId);
             Meteor.call('run_report', this.rep.report_code, (error, result) => {
                 console.log("DONE");
                 this.html = result.html;
             });
-            }, 1000);
+            }
         },
     }
 
-}
 
 </script>
 

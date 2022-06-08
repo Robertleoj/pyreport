@@ -21,12 +21,14 @@ import 'codemirror/theme/darcula.css';
 import 'codemirror/keymap/vim';
 import 'codemirror/mode/python/python';
 
-const DefaultCode = 'def isEven(num):\n\treturn num % 2 == 0';
+
 
 export default {
+    props: ['code'],
     data() {
         return {
-            inputEditor: null
+            inputEditor: null,
+            currentCode: this.code,
         };
     },
     mounted(){
@@ -37,7 +39,7 @@ export default {
             keyMap: 'vim',
             mode: 'python',
         });
-        this.inputEditor.setValue(DefaultCode);
+        this.inputEditor.setValue(this.code);
     },
     methods: {
         send_report_code(){
