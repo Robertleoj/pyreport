@@ -1,11 +1,20 @@
 <template>
     <div>
+
+        <!-- @change="log_code" -->
         <div class="codeEditor">
-            <textarea v-model="content" id="editor"></textarea>
+            <!-- <textarea v-model="content" id="editor"></textarea> -->
+            <textarea 
+                id="editor"
+                :value="content"
+            >
+            </textarea>
         </div>
         <div class="buttonRow">
             <button @click="send_report_code">Submit Code</button>
+            <button @click="log_code">Log Code</button>
         </div>
+
     </div>
 </template>
 
@@ -24,15 +33,17 @@ export default {
     data() {
         return {
             content: DefaultCode,
+            editor: null
         };
     },
     mounted(){
-        CodeMirror.fromTextArea(document.getElementById('editor'), {
+        this.editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
             lineNumbers: true,
             theme: 'darcula',
             keyMap: 'vim',
             mode: 'python',
         })
+        this.editor.on('change', this.update_code);
     },
     methods: {
         send_report_code(){
@@ -47,8 +58,11 @@ export default {
                 (error, result) => {
                     console.log("send_report_error:", error)
                     console.log("send_report_result:", result)
-                    this.content = DefaultCode;
+                    // this.content = DefaultCode;
             })
+        },
+        update_code(){
+            this.content = this.editor.getValue();
         }
     }
 }
