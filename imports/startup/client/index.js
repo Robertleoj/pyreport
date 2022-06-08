@@ -1,12 +1,13 @@
-import Vue from 'vue'
-import VueMeteorTracker from 'vue-meteor-tracker'
+import Vue from 'vue';
+import VueMeteorTracker from 'vue-meteor-tracker';
 
-import '../../ui/plugins'
+import '../../ui/plugins';
+import './set_session';
 
-import App from '../../ui/App.vue'
+import App from '../../ui/App.vue';
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
@@ -21,4 +22,4 @@ Meteor.startup(() => {
     el: '#app',
     ...App,
   })
-})
+});
