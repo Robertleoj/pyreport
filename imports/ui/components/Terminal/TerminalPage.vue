@@ -3,12 +3,10 @@
 
         <!-- @change="log_code" -->
         <div class="codeEditor">
-            <!-- <textarea v-model="content" id="editor"></textarea> -->
-            <textarea 
+            <textarea
+                ref='input'
                 id="editor"
-                :value="content"
-            >
-            </textarea>
+            />
         </div>
         <div class="buttonRow">
             <button @click="send_report_code">Submit Code</button>
@@ -32,33 +30,35 @@ const DefaultCode = 'def isEven(num):\n\treturn num % 2 == 0';
 export default {
     data() {
         return {
-            content: DefaultCode,
-            editor: null
+
+            inputEditor: null
         };
     },
     mounted(){
-        this.editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+        console.log('refs:', this.$refs.input);
+        this.inputEditor = CodeMirror.fromTextArea(this.$refs.input, {
             lineNumbers: true,
             theme: 'darcula',
             keyMap: 'vim',
             mode: 'python',
-        })
-        this.editor.on('change', this.update_code);
+
+        });
+        this.inputEditor.setValue(DefaultCode);
     },
     methods: {
         send_report_code(){
-            console.log(this.content);
             var title = "Bla";
             var description = "Bla report";
             Meteor.call(
                 'add_report',
-                this.content,
+                this.inputEditor.getValue(),
                 title,
                 description,
                 (error, result) => {
                     console.log("send_report_error:", error)
                     console.log("send_report_result:", result)
-                    // this.content = DefaultCode;
+
+                    this.inputEditor.setValue("");
             })
         },
         update_code(){
