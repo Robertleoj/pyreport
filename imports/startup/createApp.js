@@ -2,7 +2,8 @@
 import Vue from 'vue'
 
 /* === Plugins === */
-import { vuetify } from './plugins';
+// import './plugins';
+import {vuetify} from './plugins'
 
 /* === Main App === */
 import App from '../ui/App.vue';
