@@ -1,22 +1,16 @@
 <template>
     <v-content>
     <search-bar></search-bar>
-    <report-list-new></report-list-new>
+    <report-list></report-list>
     </v-content>
 </template>
 
 <script lang='js'>
 import EditorPage from '../Editor/EditorPage.vue';
-import ReportListNew from './ReportListNew.vue';
+import ReportList from './ReportList.vue';
 import SearchBar from '../SearchBar/SearchBar.vue';
 
 import {Session} from 'meteor/session';
-// import {page} from '../../statics/session';
-
-// const pageMap = {
-//     [page.opts.reports]: ReportListNew,
-//     [page.opts.editor]: EditorPage
-// };
 
 export default {
     name: "ReportsMain",
@@ -44,7 +38,7 @@ export default {
     },
     components: {
         EditorPage,
-        ReportListNew,
+        ReportList,
         SearchBar,
     }
 }

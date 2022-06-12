@@ -1,55 +1,65 @@
 <template>
-    <div class="reportList" :style='{backgroundColor: theme.darkBlue}'>
-        <ReportListItem
-            v-for="report in reports"
-            :key="report._id.str"
-            :reportId="report._id"
-        />
+    <div class="mx-5">
+        <template v-for="section in sections">
+            <div class="my-5">
+                <div class="my-3">
+                    <v-icon color='primary'>{{ section.icon }}</v-icon>
+                    <strong>{{ section.title }}</strong>
+                </div>
+
+                <report-file-container
+                    :class="section.class"
+                />
+            </div>
+        </template>  
+        <!-- </v-row> -->
     </div>
 </template>
 
-<script>
-import Reports from '../../../api/collections/Reports';
-import ReportListItem from './ReportListItem.vue'
+<script lang="js">
+import ReportFileContainer from './components/ReportFileContainer.vue';
+import { mdiHeart, mdiFolder, mdiFile } from '@mdi/js';
 
 export default {
-    inject: {
-        theme: {
-            default: {},
-        },
+    name:"ReportList",
+    data() {
+        return {
+            sections: [
+                {
+                    class: "favs",
+                    title: "Favorites",
+                    icon: mdiHeart,
+                },
+                {
+                    class: "folders",
+                    title: "Folders",
+                    icon: mdiFolder,
+                },
+                {
+                    class: "reports",
+                    title: "Reports",
+                    icon: mdiFile,
+                },
+            ],
+        };
     },
-    data(){
-        return {}
-    },
-
     components: {
-        ReportListItem,
+        ReportFileContainer,
     },
-
-    meteor: {
-        $subscribe: {
-            'reports': [],
-        },
-        reports() {
-            console.log("getting reports");
-            console.log(Reports.find({}).fetch());
-            return Reports.find({});
-        }
-    },
-
 }
-
 </script>
 
 <style scoped>
-    .reportList {
-        position: relative;
-        display: flex;
-        justify-content: flex-start;
-        align-content: flex-start;
-        flex-wrap: wrap;
-        width: 100%;
-        height: 100%;
-    }
+.favs {
+    min-height: 100px;
+}
+
+.folders {
+    min-height: 100px;
+}
+
+.reports {
+    min-height: 400px;
+}
 
 </style>
