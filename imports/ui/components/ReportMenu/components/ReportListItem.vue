@@ -5,6 +5,7 @@
         color="card"
         style="{width:getWidth()}"
         class="report-card my-2 mx-1"
+        @contextmenu="showCMenu"
     >
 
         <v-btn
@@ -21,6 +22,7 @@
         >
             <v-icon color="primary">{{icons.edit}}</v-icon>
         </v-btn>
+
         <v-card-title>
             <span 
                 class="report-title"
@@ -29,13 +31,19 @@
             {{this.reportObj.title}}
             </span>
              
+        <ReportItemContextMenu
+            ref="contextMenu"
+            :reportId="reportid"
+        />
         </v-card-title> 
         <v-card-text>{{this.reportObj.description}}</v-card-text>
+
     </v-card>
 </template>
 
 <script lang="js">
 import Reports from '../../../../api/collections/Reports';
+import ReportItemContextMenu from './ReportItemContextMenu.vue';
 import { mdiPencilCircle } from '@mdi/js';
 import {mongostr} from "/imports/utils";
 
@@ -49,12 +57,16 @@ export default {
         return {
             shown: false,
             html: null,
+            showMenu: false,
             icons: {
-                edit: mdiPencilCircle
-            }
+                edit: mdiPencilCircle,
+            },
         };
     },
 
+    components: {
+        ReportItemContextMenu
+    },
 
     mounted() {
         console.log(`reportid: ${this.reportid}`)
@@ -76,27 +88,10 @@ export default {
         openReport(){
             this.$router.push(`/report/${mongostr(this.reportid)}`);
         },
-        toggle_show_report(){
-            if (!this.shown){
-                this.get_report_html();
-            } else {
-                this.html=null;
-            }
-
-            this.shown ^= true;
-        },
-
-        get_report_html() {
-            setTimeout(() => {
-                console.log(this.reportid);
-                Meteor.call('run_report', this.reportObj.report_code, (error, result) => {
-                    console.log("DONE");
-                    this.html = result.html;
-                });
-            }, 1000);
-        },
+        showCMenu(e){
+            this.$refs.contextMenu.show(e);
+        }
     }
-
 }
 </script>
 
@@ -108,6 +103,8 @@ export default {
 .report-card {
     flex: 1 16%;
     max-width: 130px;
+    max-height: 130px;
+    overflow: hidden;
 }
 
 

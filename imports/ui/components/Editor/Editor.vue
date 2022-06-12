@@ -24,17 +24,23 @@ export default {
         }
     },
     mounted(){
-        console.log(this.initial_content);
+        // console.log(this.initial_content);
         this.editor = CodeMirror.fromTextArea(this.$refs.editorEl, {
             lineNumbers: true,
             theme: 'darcula',
             keyMap: 'vim',
-            mode: 'python'
+            mode: 'python',
+            indentUnit: 4
         });
-        this.editor.setValue(this.content);
+        this.editor.setValue(this.initial_content);
         this.editor.on('change', this.updateCode);
+        this.editor.setSize(null, 700);
     },
     methods: {
+        setCode(code){
+            this.editor.setValue(code);
+            this.content = code;
+        },
         updateCode(){
             this.content = this.editor.getValue();
         },

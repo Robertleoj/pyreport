@@ -3,22 +3,23 @@
         <div
             class="report-header"
         >
-            <div
-            >
-                <h2>{{getReportName()}}</h2>
-                <v-btn
-                    absolute
-                    x-small
-                    right
+            <div>
+                <v-text-field
+                    single-line
+                    filled
+                    type="string"
+                    :value="getReportName()"
+                    style="font-size:30px"
+                    @change="updateTitle($event)"
                 >
 
-                </v-btn>
+                </v-text-field>
             </div>
             <div
                 class="d-flex-align-content-start flex-wrap px-1 my-4"
             >
                 <v-btn
-                    class="hdritem"
+                    @click="save"
                 >Save</v-btn>
 
             </div>
@@ -26,13 +27,15 @@
         </div>
        
         <editor 
+            v-if="renderEditor"
             ref="editor" 
-            :initial_content="initCode"
+            :initial_content="initCode" 
         />
-        <div class="buttonRow">
+        
+        <!-- <div class="buttonRow">
             <button @click="send_report_code">Submit Code</button>
             <button @click="log_code">Log Code</button>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -47,7 +50,19 @@ import 'codemirror/mode/python/python';
 import Editor from './Editor.vue';
 import Reports from '../../../api/collections/Reports';
 
-const DefaultCode = 'def isEven(num):\n\treturn num % 2 == 0';
+import {mongoid, mongostr} from '/imports/utils';
+import router from '../../routes';
+import { mdiConsoleNetworkOutline } from '@mdi/js';
+
+// const DefaultCode = 'def isEven(num):\n\treturn num % 2 == 0';
+const DefaultCode = `def make_report():
+    import numpy as np
+    import pandas as pd
+    import datapane as dp
+
+
+    return dp.Report(dp.Table(pd.DataFrame(np.linspace(0, 1, 10))))
+print(make_report().get_html("Sample Report"))`;
 
 
 export default {
@@ -58,65 +73,99 @@ export default {
     data() {
         return {
             reportTitle: '',
-            editor: null,
+            initCode: '',
             newReport: true,
-            editingHeader: false
+            editingHeader: false,
+            renderEditor: false,
+            reportId: this.$route.params.reportId
         };
     },
-    created(){
-        console.log(this.$route.params);
-        var reportId = this.$route.params.reportId;
-        console.log(`reportId: ${reportId}`);
-        if(typeof reportId !== 'undefined'){
-            // Editing existing report
-            this.initCode = this.reportObj.report_code;
+    watch:{
+        reportObj(rep, oldobj){
+            var reportId = this.reportId;
+
+            if(typeof reportId === 'undefined'
+                || this.renderEditor
+                || typeof rep === 'undefined'
+            ){
+                return;
+            }
+
+            this.initCode = rep.report_code;
             this.newReport = false;
-            this.reportTitle = this.reportObj.title;
-        } else {
-            // Creating new report
+            this.reportTitle = rep.title;
+
+            this.renderEditor=true;
+        },
+    },
+
+    mounted(){
+        var reportId = this.reportId;
+        if(typeof reportId === 'undefined'){
             this.initCode = DefaultCode;
+            this.renderEditor=true;
         }
     },
-    mounted(){
-        console.log('refs:', this.$refs.editor);
-    },
     methods: {
-        send_report_code(){
-            var title = "Bla";
-            var description = "Bla report";
-            console.log(this.$refs.editor.content);
+        updateTitle(e){
+            this.reportTitle=e;
         },
-        update_code(){
-            this.content = this.$refs.editor.getValue();
-        },
-        log_code(){
-            console.log(this.$refs.editor.getValue());
+
+        // update_code(){
+        //     this.content = this.$refs.editor.getValue();
+        // },
+        // log_code(){
+        //     console.log(this.$refs.editor.getValue());
+        // },
+        save(){
+            var title = this.reportTitle;
+            var reportCode = this.$refs.editor.content;
+
+            if(this.newReport){
+                Meteor.call('add_report', reportCode, title, 'some description', (err, res) => {
+                    console.log(res);
+                    router.replace({path: `/editor/${mongostr(res)}`});
+                    this.newReport = false;
+                    this.reportId = mongostr(res);
+                });
+
+            } else {
+                var description = this.reportObj.description;
+                console.log(title)
+                console.log(description)
+                console.log(this.reportId)
+                console.log(reportCode);
+
+                Meteor.call(
+                    'update_report', this.reportId, reportCode, title, 
+                    description, (err, res) => {
+                        console.log(err);
+                        console.log(res);
+                });
+            }
         },
         getReportName(){
-            if(!this.newReport){
+            if(this.reportTitle !== ''){
                 return this.reportTitle;
             } else {
                 return '(New Report)';
             }
-        }
-        // getReport(){
-        //     console.log(this.reportObj);
-        //     return this.reportObj.report_code;
-        // }
+        },
+
     },
 
     meteor: {
         $subscribe: {
             'reports': []
         },
-
         reportObj(){
-            console.log(Reports.find().fetch());
-            var report =  Reports.findOne(
-                new Meteor.Collection.ObjectID(this.$route.params.reportId)
+
+            var report = Reports.findOne(
+                mongoid(this.$route.params.reportId)
             );
-            console.log(report);
+
             return report;
+
         }
     }
 }
