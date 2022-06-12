@@ -38,7 +38,7 @@ export default {
             showMenu: false,
             rcmenu: [
                 {
-                    title: 'uhh',
+                    title: 'Delete report',
                     handler: this.deleteReport
                 },
             ]
