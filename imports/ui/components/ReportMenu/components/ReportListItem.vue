@@ -24,7 +24,7 @@
         <v-card-title>
             <span 
                 class="report-title"
-                @click="()=>console.log('hello')"
+                @click="openReport()"
             >
             {{this.reportObj.title}}
             </span>
@@ -37,6 +37,7 @@
 <script lang="js">
 import Reports from '../../../../api/collections/Reports';
 import { mdiPencilCircle } from '@mdi/js';
+import {mongostr} from "/imports/utils";
 
 
 
@@ -54,6 +55,7 @@ export default {
         };
     },
 
+
     mounted() {
         console.log(`reportid: ${this.reportid}`)
     },
@@ -67,10 +69,13 @@ export default {
             return Reports.findOne({
                 _id: this.reportid
             });
-        }
+        },
     },
 
     methods: {
+        openReport(){
+            this.$router.push(`/report/${mongostr(this.reportid)}`);
+        },
         toggle_show_report(){
             if (!this.shown){
                 this.get_report_html();
@@ -83,11 +88,11 @@ export default {
 
         get_report_html() {
             setTimeout(() => {
-            console.log(this.reportid);
-            Meteor.call('run_report', this.reportObj.report_code, (error, result) => {
-                console.log("DONE");
-                this.html = result.html;
-            });
+                console.log(this.reportid);
+                Meteor.call('run_report', this.reportObj.report_code, (error, result) => {
+                    console.log("DONE");
+                    this.html = result.html;
+                });
             }, 1000);
         },
     }

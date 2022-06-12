@@ -8,7 +8,7 @@
 
 <script lang='js'>
 import ReportList from './ReportList.vue';
-import SearchBar from '../SearchBar/SearchBar.vue';
+import SearchBar from './SearchBar.vue';
 
 
 export default {

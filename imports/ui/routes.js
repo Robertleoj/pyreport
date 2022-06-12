@@ -1,8 +1,9 @@
 import VueRouter from 'vue-router';
 
 
-import EditorPage from '../ui/components/Editor/EditorPage';
-import ReportsMain from '../ui/components/ReportMenu/ReportsMain';
+import EditorPage from '/imports/ui/components/Editor/EditorPage';
+import ReportsMain from '/imports/ui/components/ReportMenu/ReportsMain';
+import ReportViewerMain from '/imports/ui/components/ReportViewer/ReportViewerMain';
 
 
 const routes = [
@@ -15,6 +16,11 @@ const routes = [
         path: '/editor/:reportId?',
         name: "Editor",
         component: EditorPage
+    },
+    {
+        path: '/report/:reportId?',
+        name: "ReportViewer",
+        component: ReportViewerMain
     }
 ];
 

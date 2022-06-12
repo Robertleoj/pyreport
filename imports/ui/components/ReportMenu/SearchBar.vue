@@ -5,6 +5,7 @@
         background-color='black'
         label="Search"
         solo
+        class="my-5"
     >
     </v-autocomplete>
 </template>
