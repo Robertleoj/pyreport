@@ -3,15 +3,16 @@ import Vue from 'vue'
 
 /* === Plugins === */
 // import './plugins';
-import {vuetify} from './plugins'
+import {default as vuetify} from './vuetify';
 
 /* === Main App === */
-import App from '../ui/App.vue';
+import App from '../../ui/components/App.vue';
 
 
 console.log(vuetify)
 
 function createApp() {
+
     return {
         app: new Vue({
             vuetify,

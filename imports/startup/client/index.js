@@ -1,5 +1,6 @@
-/*--------  CreateApp  --------*/
-import CreateApp from '../createApp'
+import CreateApp from './createApp'
+import './vueMeteorTracker';
+import './set_session';
 
 
 /*= End of Imports =*/

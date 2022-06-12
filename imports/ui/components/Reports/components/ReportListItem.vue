@@ -3,6 +3,8 @@
     <!--use v-hover here-->
     <v-card
         color="card"
+        style="{width:getWidth()}"
+        class="report-card my-2 mx-1"
     >
         <v-card-title>
             <span 
@@ -19,6 +21,9 @@
 
 <script lang="js">
 import Reports from '../../../../api/collections/Reports';
+
+
+
 
 export default {
     name: "ReportListItem",
@@ -75,6 +80,11 @@ export default {
 <style scoped>
 .report-title:hover {
     text-decoration: underline;
+}
+
+.report-card {
+    flex: 1 16%;
+    max-width: 130px;
 }
 
 

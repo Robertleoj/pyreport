@@ -1,21 +1,13 @@
 <template>
 
-    <v-container
-        class="report-folder-container"
-        fluid
+    <div
+        class="report-folder-container d-flex align-content-start flex-wrap px-1"
     >
-        <v-row>
-            <v-col 
-                v-for="rep in reports"
-                cols="2"
-            >
-                <ReportListItem 
-                    :reportid="rep._id"
-                />
-            </v-col>
-        </v-row>
-
-    </v-container>
+        <ReportListItem 
+            v-for="rep in reports"
+            :reportid="rep._id"
+        />
+    </div>
  
     <!-- </v-alert> -->
 </template>

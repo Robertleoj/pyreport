@@ -11,14 +11,14 @@
 </template>
 
 <script lang='js'>
-import EditorPage from './components/Editor/EditorPage.vue';
-import NavBar from './components/NavBar/NavBar.vue';
-import ReportListNew from './components/Reports/ReportListNew.vue';
-import SearchBar from './components/SearchBar/SearchBar.vue';
+import EditorPage from './Editor/EditorPage.vue';
+import NavBar from './NavBar/NavBar.vue';
+import ReportListNew from './Reports/ReportListNew.vue';
+import SearchBar from './SearchBar/SearchBar.vue';
 
-import ThemeProvider from './components/Providers/ThemeProvider.vue';
+import ThemeProvider from './Providers/ThemeProvider.vue';
 import {Session} from 'meteor/session';
-import {page} from '../statics/session';
+import {page} from '../../statics/session';
 
 const pageMap = {
     [page.opts.reports]: ReportListNew,
