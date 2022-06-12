@@ -1,30 +1,19 @@
 <template>
-    <!-- Border around --> 
-                    <!-- :key="`Title${index}`" -->
-                    <!-- :key="`Card${index}`" -->
-    <v-container fluid>
-        <!-- <v-row> -->
-        <template v-for="(section, index) in sections">
-            <v-col 
-                cols="12" 
-                :class="`pb-0`" 
-            >
-                <v-container class='pa-0 ma-0'>
+    <div class="mx-5">
+        <template v-for="section in sections">
+            <div class="my-5">
+                <div class="my-3">
                     <v-icon color='primary'>{{ section.icon }}</v-icon>
                     <strong>{{ section.title }}</strong>
-                </v-container>
+                </div>
 
-            </v-col> 
-            <v-col 
-                cols="12" 
-            >           
                 <report-file-container
                     :class="section.class"
                 />
-            </v-col>
+            </div>
         </template>  
         <!-- </v-row> -->
-  </v-container>
+    </div>
 </template>
 
 <script lang="js">
@@ -40,19 +29,16 @@ export default {
                     class: "favs",
                     title: "Favorites",
                     icon: mdiHeart,
-                    height: 100,
                 },
                 {
                     class: "folders",
                     title: "Folders",
                     icon: mdiFolder,
-                    height: 100,
                 },
                 {
                     class: "reports",
                     title: "Reports",
                     icon: mdiFile,
-                    height: 400,
                 },
             ],
         };

@@ -1,19 +1,19 @@
 <template>
-    <v-card class="report">
-        <v-card-title>{{this.reportObj.title}} </v-card-title> 
+    
+    <!--use v-hover here-->
+    <v-card
+        color="card"
+    >
+        <v-card-title>
+            <span 
+                class="report-title"
+                @click="()=>console.log('hello')"
+            >
+            {{this.reportObj.title}}
+            </span>
+             
+        </v-card-title> 
         <v-card-text>{{this.reportObj.description}}</v-card-text>
-            <v-card-actions>
-                <v-btn
-                    v-if="this.html===null"
-                    class="run-report-button"
-                    @click.prevent="toggle_show_report"
-                >
-                Run Report
-                </v-btn>
-            </v-card-actions>
-
-            <!-- <iframe class="report-container" v-if="this.html!==null" :srcdoc="this.html">
-            </iframe>  -->
     </v-card>
 </template>
 
@@ -41,7 +41,6 @@ export default {
         },
 
         reportObj() {
-            // return Reports.findById(this.reportId);
             return Reports.findOne({
                 _id: this.reportid
             });
@@ -74,6 +73,9 @@ export default {
 </script>
 
 <style scoped>
+.report-title:hover {
+    text-decoration: underline;
+}
 
 
 </style>

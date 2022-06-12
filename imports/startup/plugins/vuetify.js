@@ -25,6 +25,7 @@ const opts = {
                 warning: '#ffb86c',
                 background: '#44475a',
                 black: '#282a36',
+                card: '#211726',
             },
         },
         options: {

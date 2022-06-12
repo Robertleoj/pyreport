@@ -1,31 +1,21 @@
 <template>
-    <!-- Border around --> 
-   
-    <!-- <v-alert 
-        class="ma-0 pa-0"
-        outlined color='primary'
-    > -->
-    <v-card
-        outlined
-        rounded='lg'
+
+    <v-container
         class="report-folder-container"
+        fluid
     >
-        <v-container
-            fluid
-        >
-            <v-row 
+        <v-row>
+            <v-col 
                 v-for="rep in reports"
-                cols="12"
+                cols="2"
             >
-                <v-col>
-                    <ReportListItem 
-                        :reportid="rep._id"
-                    />
-                    <!-- <h1>{{report._id}}</h1> -->
-                </v-col>
-            </v-row>
-        </v-container>
-    </v-card>
+                <ReportListItem 
+                    :reportid="rep._id"
+                />
+            </v-col>
+        </v-row>
+
+    </v-container>
  
     <!-- </v-alert> -->
 </template>
@@ -56,6 +46,7 @@ export default {
 <style scoped>
 .report-folder-container {
     border: 1px solid var(--v-primary-base);
-    background-color: var(--v-black-base)
+    background-color: var(--v-black-base);
+    border-radius: 10px;
 }
 </style>
