@@ -2,7 +2,7 @@ import VueRouter from 'vue-router';
 
 
 import EditorPage from '../ui/components/Editor/EditorPage';
-import ReportsMain from '../ui/components/Reports/ReportsMain';
+import ReportsMain from '../ui/components/ReportMenu/ReportsMain';
 
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
         component: ReportsMain
     },
     {
-        path: '/editor',
+        path: '/editor/:reportId?',
         name: "Editor",
         component: EditorPage
     }

@@ -12,7 +12,7 @@
             small
             absolute
             right
-            to="/editor"
+            :to="`/editor/${reportid}`"
             :retain-focus-on-click="true"
             :icon="true"
             :dark="true"

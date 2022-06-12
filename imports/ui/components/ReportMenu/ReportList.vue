@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-5">
+    <div>
         <template v-for="section in sections">
             <div class="my-5">
                 <div class="my-3">

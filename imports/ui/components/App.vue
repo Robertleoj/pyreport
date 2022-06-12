@@ -2,7 +2,9 @@
     <v-app id="app">
         <nav-bar></nav-bar>
         <div height="30px"></div>
-        <v-main>
+        <v-main
+            class="mx-5"
+        >
         <router-view></router-view>
         </v-main>
     </v-app>

@@ -17,6 +17,7 @@ const opts = {
                 primary: '#ff79c6',
                 secondary: '#bd93f9',
                 accent: '#ffb86c',
+                // accent: '#282a36',
                 error: '#ff5555',
                 info: '#8be9fd',
                 success: '#50fa7b',
@@ -24,6 +25,7 @@ const opts = {
                 background: '#44475a',
                 black: '#282a36',
                 card: '#211726',
+                navText: '#282a36'
             },
         },
         options: {

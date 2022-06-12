@@ -1,19 +1,21 @@
 <template>
-    <v-app-bar app flat color="background" height="0">
-      <template v-slot:extension>
-          <v-container fluid style="width: 100%;">
-                <v-breadcrumbs :items="breadcrumbItems">
-                  <template v-slot:extension>
-                    <v-icon>mdi-forward</v-icon>
-                  </template>
+    <v-app-bar dark app dense flat color="">
+        <!-- <template v-slot:extension> -->
+            <v-container class="py-0" fluid style="width: 100%;">
+                <v-breadcrumbs 
+                    :items="breadcrumbItems"
+                >
+                    <template v-slot:extension>
+                        <v-icon>mdi-forward</v-icon>
+                    </template>
                 </v-breadcrumbs>
-          </v-container>
-        <v-tabs class='mr-10' right>
-          <v-tab to="/">Reports</v-tab>
-          <v-tab to="/editor">Editor</v-tab>
-          <v-tab>Options</v-tab>
-        </v-tabs>
-      </template>
+            </v-container>
+            <v-tabs class='mr-10' right>
+                <v-tab to="/">Reports</v-tab>
+                <v-tab to="/editor">Editor</v-tab>
+                <v-tab>Options</v-tab>
+            </v-tabs>
+        <!-- </template> -->
     </v-app-bar>
 </template>
 
@@ -41,3 +43,7 @@ export default {
     }),
 }
 </script>
+
+<style scoped>
+
+</style>

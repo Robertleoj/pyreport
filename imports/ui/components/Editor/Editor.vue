@@ -13,6 +13,7 @@ import 'codemirror/mode/python/python';
 
 
 export default {
+    name: "Editor",
     props: [
         'initial_content'
     ],

@@ -1,9 +1,10 @@
 <template>
-    <v-content>
+    <div>
     <search-bar></search-bar>
     <report-list></report-list>
-    </v-content>
+    </div>
 </template>
+
 
 <script lang='js'>
 import ReportList from './ReportList.vue';
