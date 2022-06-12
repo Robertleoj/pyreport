@@ -103,7 +103,9 @@ export default {
 .report-card {
     flex: 1 16%;
     max-width: 130px;
+    min-width: 110px;
     max-height: 130px;
+    min-height: 110px;
     overflow: hidden;
 }
 
