@@ -3,13 +3,11 @@ import Vue from 'vue';
 
 // Use this import while developing
 import Vuetify from 'vuetify/lib';
-
 // IMPORTANT: Use this imports in production to reduce bundle size
 // import Vuetify from "vuetify/lib/framework";
 // import "vuetify/lib/util/colors";
 // import "vuetify/lib/directives";
 
-Vue.use(Vuetify);
 
 const opts = {
     theme: {

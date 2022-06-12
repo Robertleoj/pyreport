@@ -9,8 +9,8 @@
                 </v-breadcrumbs>
           </v-container>
         <v-tabs class='mr-10' right>
-          <v-tab>Reports</v-tab>
-          <v-tab>Editor</v-tab>
+          <v-tab to="/">Reports</v-tab>
+          <v-tab to="/editor">Editor</v-tab>
           <v-tab>Options</v-tab>
         </v-tabs>
       </template>

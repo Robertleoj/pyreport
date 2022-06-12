@@ -2,10 +2,14 @@
     <v-app id="app">
         
         <nav-bar></nav-bar>
+        <div height="30px"></div>
         <v-main>
-        <search-bar></search-bar>
-        <report-list-new></report-list-new>
+        <router-view></router-view>
         </v-main>
+        <!-- <v-main> -->
+        <!-- <search-bar></search-bar> -->
+        <!-- <report-list-new></report-list-new> -->
+        <!-- </v-main> -->
         <!-- <component :is="sessionPage" ></component> -->
     </v-app>
 </template>
@@ -62,14 +66,5 @@ export default {
 <style scoped>
 #app {
   background-color: var(--v-background-base);
-}
-
-html {
-    height: 100%
-}
-.bodyDiv {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 </style>

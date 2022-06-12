@@ -15,7 +15,6 @@
 
 
 <script>
-import * as CodeMirror from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/darcula.css';
 import 'codemirror/keymap/vim';

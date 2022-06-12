@@ -6,6 +6,21 @@
         style="{width:getWidth()}"
         class="report-card my-2 mx-1"
     >
+
+        <v-btn
+            fab
+            small
+            absolute
+            right
+            to="/editor"
+            :retain-focus-on-click="true"
+            :icon="true"
+            :dark="true"
+            :style="{right: '0px', top:'0px'}"
+            class="pr-0 mr-0"
+        >
+            <v-icon color="primary">{{icons.edit}}</v-icon>
+        </v-btn>
         <v-card-title>
             <span 
                 class="report-title"
@@ -21,7 +36,7 @@
 
 <script lang="js">
 import Reports from '../../../../api/collections/Reports';
-
+import { mdiPencilCircle } from '@mdi/js';
 
 
 
@@ -33,6 +48,9 @@ export default {
         return {
             shown: false,
             html: null,
+            icons: {
+                edit: mdiPencilCircle
+            }
         };
     },
 
