@@ -27,6 +27,7 @@ export default {
         this.reportId = this.$route.params.reportId;
         Meteor.call('run_report', this.reportId, (error, result) => {
             console.log("Ran report");
+            console.log(result);
             this.html = result.html;
         });
     }
