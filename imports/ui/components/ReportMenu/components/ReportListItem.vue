@@ -67,15 +67,7 @@ export default {
     components: {
         ReportItemContextMenu
     },
-
-    mounted() {
-        console.log(`reportid: ${this.reportid}`)
-    },
-
     meteor: {
-        $subscribe: {
-            'reports': []
-        },
 
         reportObj() {
             return Reports.findOne({

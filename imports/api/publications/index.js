@@ -1,1 +1,2 @@
-import './reports'
+import './reports';
+import './folders';

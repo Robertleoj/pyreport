@@ -25,9 +25,9 @@
 <script lang="js">
 
 export default {
-    name: "ReportItemContextMenu",
+    name: "FolderItemContextMenu",
     props: [
-        'reportId'
+        'folderId'
     ],
 
     data(){
@@ -38,8 +38,8 @@ export default {
             showMenu: false,
             rcmenu: [
                 {
-                    title: 'Delete report',
-                    handler: this.deleteReport
+                    title: 'Delete folder',
+                    handler: this.deleteFolder
                 },
             ]
         }
@@ -54,8 +54,8 @@ export default {
                 this.showMenu = true
             })
         },
-        deleteReport(){
-            Meteor.call('delete_report', this.reportId, (err, res) =>{
+        deleteFolder(){
+            Meteor.call('delete_folder', this.folderId, (err, res) =>{
                 console.log(err);
                 console.log(res);
             });

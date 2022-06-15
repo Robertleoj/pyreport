@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import Folders from './collections/Folders.js';
 import Reports from './collections/Reports.js';
 
 Meteor.startup(() => {
@@ -13,4 +14,14 @@ Meteor.startup(() => {
             Reports.insert(rep);
         });
     };
+    if(Folders.find().count() === 0){
+        const folderData =
+            {
+                name: 'Root',
+                parentId: null,
+            };
+        Folders.insert(folderData);
+    } else {
+        console.log("FAILURE:", Folders.find().count());
+    }
 });
