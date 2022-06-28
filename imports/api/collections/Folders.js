@@ -3,10 +3,8 @@ import SimpleSchema from 'simpl-schema';
 
 const Folders = new Mongo.Collection('folders', {idGeneration: "MONGO"});
 Folders.schema = new SimpleSchema({
-    parentId: {type: String, optional: true},
-    name: {type: String},
-    childFolderIds: [{type: Number}],
-    childFileIds: [{type: Number}],
+    parentFolderId: {type: String, optional: true},
+    name: {type: String}
 });
 
 export default Folders;
