@@ -1,10 +1,14 @@
 import Reports from '../../collections/Reports'
+import Folders from '/imports/api/collections/Folders';
 
 Meteor.methods({
     // 'update-report'(){
 
     // },
-    'add_report'(report_code, title, description, parentFolderId){
+    'add_report'(report_code, title, description, parentFolderId = null){
+        if(parentFolderId === null) {
+            parentFolderId = Folders.findOne({name: "Root"})._id;
+        }
         new_report = {
             title: title,
             description: description,
