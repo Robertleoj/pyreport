@@ -1,5 +1,4 @@
 import Reports from '../../collections/Reports'
-import {mongoid, mongostr} from '/imports/utils';
 
 Meteor.methods({
     // 'update-report'(){
@@ -17,7 +16,7 @@ Meteor.methods({
         return Reports.insert(new_report);
     },
     'delete_report'(reportId){
-        Reports.remove(mongoid(reportId));
+        Reports.remove(reportId);
     },
     'update_report'(
         reportId,
@@ -27,7 +26,7 @@ Meteor.methods({
         reportFolderId
     ){
         return Reports.update(
-            {_id: mongoid(reportId)},
+            {_id:reportId},
             { 
                 $set: {
                     report_code: reportCode,

@@ -10,7 +10,10 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: ReportsMain
+        component: ReportsMain,
+        props: route => {
+            return {folderId: route.query.f};
+        }
     },
     {
         path: '/editor/:reportId?',

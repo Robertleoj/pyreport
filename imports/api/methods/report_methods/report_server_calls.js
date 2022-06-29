@@ -1,14 +1,13 @@
 import urls from './report_server_config';
 import {postData} from '../../utils/requests';
 import Reports from '../../collections/Reports';
-import {mongoid} from '/imports/utils/'
 
 Meteor.methods({
     'run_report': async function(reportId) {
         console.log("bruh 2");
 
         var reportObj = Reports.findOne(
-            mongoid(reportId)
+            reportId
         );
 
         if(typeof reportObj === 'undefined'){

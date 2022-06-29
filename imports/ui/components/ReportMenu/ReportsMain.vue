@@ -12,6 +12,9 @@ import SearchBar from './SearchBar.vue';
 
 
 export default {
+    props: [
+        'folderId'
+    ],
     name: "ReportsMain",
 
     methods: {

@@ -50,7 +50,6 @@ import 'codemirror/mode/python/python';
 import Editor from './Editor.vue';
 import Reports from '../../../api/collections/Reports';
 
-import {mongoid, mongostr} from '/imports/utils';
 import router from '../../routes';
 import { mdiConsoleNetworkOutline } from '@mdi/js';
 
@@ -124,9 +123,9 @@ export default {
             if(this.newReport){
                 Meteor.call('add_report', reportCode, title, 'some description', (err, res) => {
                     console.log(res);
-                    router.replace({path: `/editor/${mongostr(res)}`});
+                    router.replace({path: `/editor/${res}`});
                     this.newReport = false;
-                    this.reportId = mongostr(res);
+                    this.reportId = res;
                 });
 
             } else {
@@ -161,7 +160,7 @@ export default {
         reportObj(){
 
             var report = Reports.findOne(
-                mongoid(this.$route.params.reportId)
+                this.$route.params.reportId
             );
 
             return report;

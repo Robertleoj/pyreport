@@ -45,7 +45,6 @@
 import Reports from '../../../../api/collections/Reports';
 import ReportItemContextMenu from './ReportItemContextMenu.vue';
 import { mdiPencilCircle } from '@mdi/js';
-import {mongostr} from "/imports/utils";
 
 
 
@@ -78,7 +77,7 @@ export default {
 
     methods: {
         openReport(){
-            this.$router.push(`/report/${mongostr(this.reportid)}`);
+            this.$router.push(`/report/${this.reportid}`);
         },
         showCMenu(e){
             this.$refs.contextMenu.show(e);

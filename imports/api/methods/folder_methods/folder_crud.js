@@ -1,11 +1,10 @@
 import Folders from "../../collections/Folders";
-import {mongoid, mongostr} from '/imports/utils';
 
 
 Meteor.methods({
     'add_folder'(name, parentId=null){
         // Make sure parent exists in folders
-        if(!Folders.findOne(mongoid(parentId))){
+        if(!Folders.findOne(parentId)){
             throw new Meteor.Error('Must have parent folder');
         }
 
@@ -18,6 +17,6 @@ Meteor.methods({
         return Folders.insert(new_folder);
     },
     'delete_folder'(folderId){
-        return Folders.remove(mongoid(folderId));
+        return Folders.remove(folderId);
     },
 })

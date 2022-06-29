@@ -26,7 +26,6 @@
 <script lang="js">
 import Folders from '../../../../api/collections/Folders';
 import FolderItemContextMenu from './FolderItemContextMenu.vue';
-import {mongostr} from "/imports/utils";
 import { mdiFolder } from '@mdi/js';
 
 
