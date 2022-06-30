@@ -7,8 +7,6 @@
 
             </Page>
         </div>
-        <span>{{JSON.stringify(report_res)}}</span>
-        <span>{{pages()}}</span>
     </div>
 </template>
 
@@ -18,8 +16,8 @@ import Page from './report_elements/Page.vue';
 export default {
     data() {
         return {
-            report_res: null,
-            attachments: null,
+            report_res: this.result,
+            attachments: this.result.attachments,
             xml_doc: null
         }
     },
@@ -35,13 +33,8 @@ export default {
         return {attachments: this.attachments}
     },
     created(){
-        this.report_res = this.result;
-        this.report_doc = this.report_res.report_doc;
-        this.attachments = this.report_res.attachments;
-
         let parser = new DOMParser();
-
-        let xml_doc = parser.parseFromString(this.report_doc, 'text/xml');
+        let xml_doc = parser.parseFromString(this.report_res.report_doc, 'text/xml');
         console.log(xml_doc);
 
         this.xml_doc = xml_doc;
